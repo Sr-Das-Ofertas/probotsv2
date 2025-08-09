@@ -1,15 +1,24 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { type Product } from '@/data/products';
 
 const dataFilePath = path.join(process.cwd(), 'src/db/products.json');
 
-// GET all products
-export async function GET() {
+// GET all products or filter by query
+export async function GET(request: NextRequest) {
   try {
     const fileContents = await fs.readFile(dataFilePath, 'utf8');
-    const products = JSON.parse(fileContents);
+    let products: Product[] = JSON.parse(fileContents);
+
+    const searchQuery = request.nextUrl.searchParams.get('q');
+
+    if (searchQuery) {
+      products = products.filter(p => 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
     return NextResponse.json(products);
   } catch (error) {
     console.error('Failed to read products:', error);

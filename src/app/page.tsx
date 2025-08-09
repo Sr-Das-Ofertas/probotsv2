@@ -15,7 +15,7 @@ export default function Home() {
         </section>
 
         {/* Categorias Principais */}
-        <section className="-mt-12 z-10 relative md:mt-0 md:pt-40">
+        <section className="-mt-6 z-10 relative md:mt-0 md:pt-40">
         <CategoryGrid categoryIds={['campo', 'society', 'futsal']} />
         </section>
 

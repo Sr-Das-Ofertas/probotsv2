@@ -45,7 +45,7 @@ export function BannerCarousel() {
   if (banners.length === 0) return null;
 
   return (
-    <div className="relative w-full h-screen overflow-hidden box-border pt-36" ref={emblaRef}>
+    <div className="relative w-full h-[40vh] overflow-hidden box-border pt-48" ref={emblaRef}>
       <div className="flex h-full">
       {banners.map((banner, index) => (
         <div

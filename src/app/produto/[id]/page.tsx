@@ -5,11 +5,12 @@ import { useParams, useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useCart } from '@/hooks/useCart';
-import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus, Check } from 'lucide-react';
+import { useCartContext } from '@/context/CartContext';
+import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus, Check, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 import type { Product } from '@/data/products';
 import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
 
 export default function ProductPage() {
   const params = useParams();
@@ -21,7 +22,7 @@ export default function ProductPage() {
   const [selectedSize, setSelectedSize] = useState('');
   const [detalhesImageUrl, setDetalhesImageUrl] = useState('');
   const [imageError, setImageError] = useState(false);
-  const { addItem, formatPrice } = useCart();
+  const { addItem, formatPrice, openCart, whatsappNumber } = useCartContext();
   const { toast } = useToast();
 
   const sizes = ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44'];
@@ -126,10 +127,26 @@ export default function ProductPage() {
     }
     addItem(product, quantity, selectedSize);
     toast({
-      title: '🛒 Produto adicionado ao carrinho!',
-      description: `${product.name} (Tamanho: ${selectedSize}) foi adicionado com sucesso.`,
+      title: '🛒 Produto adicionado!',
+      description: `${product.name} (Tamanho: ${selectedSize}) foi para o seu carrinho.`,
       variant: 'cart',
+      duration: 3000,
+      action: (
+        <ToastAction altText="Ver carrinho" onClick={openCart}>
+          Ver carrinho
+        </ToastAction>
+      ),
     });
+  };
+
+  const handleWhatsAppClick = () => {
+    if (!product) return;
+
+    const message = `Olá! Tenho interesse no produto: *${product.name}* (Valor: ${formatPrice(product.price)}). Gostaria de mais informações.`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -283,6 +300,14 @@ export default function ProductPage() {
             >
               <ShoppingCart className="w-5 h-5 mr-2" />
               {product.inStock ? 'Adicionar ao Carrinho' : 'Fora de Estoque'}
+            </Button>
+            <Button
+              onClick={handleWhatsAppClick}
+              variant="outline"
+              className="w-full bg-green-500 hover:bg-green-600 text-white border-green-500"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Comprar pelo WhatsApp
             </Button>
 
             <div className="flex gap-2">

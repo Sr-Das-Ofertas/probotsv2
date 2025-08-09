@@ -5,8 +5,10 @@ import { useParams, useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
-import { ProductCarousel } from '@/components/carousel/ProductCarousel';
+// import { ProductCarousel } from '@/components/carousel/ProductCarousel';
 import type { Category, Product } from '@/data/products';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -82,13 +84,31 @@ export default function CategoryPage() {
           <p className="text-gray-600 mt-2">{category.description}</p>
         </section>
 
-        <ProductCarousel
-          title={`Produtos de ${category.name}`}
-          type="category"
-          categoryId={category.id}
-        />
+        <section className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <Link href={`/produto/${product.id}`} key={product.id} className="group">
+                <div className="border rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-lg">
+                  <div className="relative w-full h-48 bg-gray-200">
+                    <Image
+                      src={product.coverImage}
+                      alt={product.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg truncate">{product.name}</h3>
+                    <p className="text-proboots-red font-bold text-xl mt-2">R$ {(product.price / 100).toFixed(2).replace('.', ',')}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
         
-        <div className="p-4">
+        <div className="p-4 text-center">
           <Button onClick={() => router.push('/')}>Voltar para a Home</Button>
         </div>
       </main>

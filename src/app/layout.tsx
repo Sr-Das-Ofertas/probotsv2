@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Proboots",
   description: "As melhores chuteiras do mercado.",
+  icons: {
+    icon: '/logo.ico',
+  },
 };
 
 export default function RootLayout({

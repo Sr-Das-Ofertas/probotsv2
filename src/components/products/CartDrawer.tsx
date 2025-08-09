@@ -1,6 +1,6 @@
 'use client';
 
-import { useCart } from '@/hooks/useCart';
+import { useCartContext } from '@/context/CartContext';
 import { Button } from '@/components/ui/button';
 import { X, Trash2, Minus, Plus, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
@@ -21,7 +21,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     isCheckoutModalOpen,
     openCheckoutModal,
     closeCheckoutModal
-  } = useCart();
+  } = useCartContext();
 
   if (!isOpen) return null;
 

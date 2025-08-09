@@ -7,9 +7,10 @@ import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { useCart } from '@/hooks/useCart';
+import { useCartContext } from '@/context/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { Product } from '@/data/products';
+import { ToastAction } from '@/components/ui/toast';
 
 interface ProductCarouselProps {
   title: string;
@@ -20,7 +21,7 @@ interface ProductCarouselProps {
 export function ProductCarousel({ title, type, categoryId }: ProductCarouselProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const router = useRouter();
-  const { addItem, formatPrice } = useCart();
+  const { addItem, formatPrice, openCart } = useCartContext();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -54,11 +55,19 @@ export function ProductCarousel({ title, type, categoryId }: ProductCarouselProp
 
   const handleAddToCart = (product: Product, e: React.MouseEvent) => {
     e.stopPropagation();
-    addItem(product, 1);
+    // O tamanho é obrigatório em outras partes, mas opcional aqui.
+    // Para simplificar, não pediremos tamanho no carrossel.
+    addItem(product, 1, undefined); 
     toast({
-      title: '🛒 Produto adicionado ao carrinho!',
-      description: `${product.name} foi adicionado com sucesso.`,
+      title: '🛒 Produto adicionado!',
+      description: `${product.name} foi para o seu carrinho.`,
       variant: 'cart',
+      duration: 3000,
+      action: (
+        <ToastAction altText="Ver carrinho" onClick={openCart}>
+          Ver carrinho
+        </ToastAction>
+      ),
     });
   };
 

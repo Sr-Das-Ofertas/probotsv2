@@ -19,6 +19,10 @@ export interface Cart {
 interface CartContextType {
   cart: Cart;
   isCheckoutModalOpen: boolean;
+  isCartOpen: boolean;
+  whatsappNumber: string; // Adicionado para acesso externo
+  openCart: () => void;
+  closeCart: () => void;
   openCheckoutModal: () => void;
   closeCheckoutModal: () => void;
   addItem: (product: Product, quantity: number, size?: string) => void;
@@ -38,6 +42,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     itemCount: 0
   });
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [whatsappNumber, setWhatsappNumber] = useState<string>('');
 
   // Carregar configurações do WhatsApp
@@ -86,6 +91,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const openCheckoutModal = () => setIsCheckoutModalOpen(true);
   const closeCheckoutModal = () => setIsCheckoutModalOpen(false);
+  const openCart = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
 
   const recalculateCart = (items: CartItem[]): Cart => {
     const total = items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
@@ -199,7 +206,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <CartContext.Provider value={{ cart, isCheckoutModalOpen, openCheckoutModal, closeCheckoutModal, addItem, removeItem, updateQuantity, clearCart, sendToWhatsApp, formatPrice }}>
+    <CartContext.Provider value={{ cart, isCheckoutModalOpen, isCartOpen, whatsappNumber, openCart, closeCart, openCheckoutModal, closeCheckoutModal, addItem, removeItem, updateQuantity, clearCart, sendToWhatsApp, formatPrice }}>
       {children}
     </CartContext.Provider>
   );
