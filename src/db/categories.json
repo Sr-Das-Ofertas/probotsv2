@@ -1,0 +1,44 @@
+[
+  {
+    "id": "campo",
+    "name": "Campo",
+    "image": "/banner3.png",
+    "description": "Chuteiras para futebol de campo",
+    "productIds": ["1", "2"]
+  },
+  {
+    "id": "society",
+    "name": "Society",
+    "image": "/banner5.png",
+    "description": "Chuteiras para futebol society",
+    "productIds": ["3"]
+  },
+  {
+    "id": "futsal",
+    "name": "Futsal",
+    "image": "/banner1.png",
+    "description": "Chuteiras para futsal",
+    "productIds": []
+  },
+  {
+    "id": "brindes",
+    "name": "Chuteira + Brindes",
+    "image": "/banner4.png",
+    "description": "Combos especiais de chuteiras com brindes",
+    "productIds": []
+  },
+  {
+    "id": "acessorios",
+    "name": "Acessórios",
+    "image": "/banner2.png",
+    "description": "Luvas, meiões, bolsas e mais",
+    "productIds": []
+  },
+  {
+    "id": "trava-mista",
+    "name": "Trava Mista",
+    "image": "/banner6.png",
+    "description": "Chuteiras para campos macios ou úmidos",
+    "productIds": []
+  }
+] 

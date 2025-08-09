@@ -1,0 +1,20 @@
+[
+  {
+    "title": "1",
+    "image": "https://media.discordapp.net/attachments/1221867569460543508/1398858560242323628/banner1.png?ex=68975ece&is=68960d4e&hm=46440942e4153f82926ed4cea7d49fa8442e9cd57e33ad3be44453f8fe52c826&=&format=webp&quality=lossless&width=480&height=704",
+    "active": true,
+    "id": "1754712530760"
+  },
+  {
+    "title": "2",
+    "image": "https://media.discordapp.net/attachments/1221867569460543508/1398858560640909412/banner2.png?ex=68975ece&is=68960d4e&hm=e9e4b6b4a76f1abf2fc78cef80f36f2e4c179230d074beccf7a9b377d475e786&=&format=webp&quality=lossless&width=480&height=704",
+    "active": true,
+    "id": "1754712538276"
+  },
+  {
+    "title": "3",
+    "image": "https://media.discordapp.net/attachments/1221867569460543508/1398858560972001490/banner3.png?ex=68975ece&is=68960d4e&hm=c037dd814ffcc3f41db54309011209e7c86c782683a40b932ca5c0226a5da5fb&=&format=webp&quality=lossless&width=480&height=704",
+    "active": true,
+    "id": "1754712544361"
+  }
+]
