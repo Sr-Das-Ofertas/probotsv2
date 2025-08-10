@@ -1,1 +1,0 @@
-docker build /etc/easypanel/projects/api/proboots/code/ -f /etc/easypanel/projects/api/proboots/code/.nixpacks/Dockerfile -t easypanel/api/proboots --build-arg CI=true --build-arg GIT_SHA=undefined --build-arg NIXPACKS_METADATA=node --build-arg NODE_ENV=production --build-arg NPM_CONFIG_PRODUCTION=false --label keep=true

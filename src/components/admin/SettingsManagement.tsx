@@ -8,10 +8,11 @@ import { useToast } from '@/hooks/use-toast';
 
 interface Settings {
   whatsappNumber: string;
+  pixelId: string;
 }
 
 export function SettingsManagement() {
-  const [settings, setSettings] = useState<Settings>({ whatsappNumber: '' });
+  const [settings, setSettings] = useState<Settings>({ whatsappNumber: '', pixelId: '' });
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -92,6 +93,22 @@ export function SettingsManagement() {
             />
             <p className="text-xs text-gray-500">
               Digite o número completo com código do país (55 para Brasil) e DDD, sem espaços ou caracteres especiais.
+            </p>
+          </div>
+          
+          <div className="space-y-2">
+            <label htmlFor="pixelId" className="text-sm font-medium">
+              Facebook Pixel ID
+            </label>
+            <Input
+              id="pixelId"
+              type="text"
+              placeholder="Ex: 123456789012345"
+              value={settings.pixelId}
+              onChange={(e) => setSettings({ ...settings, pixelId: e.target.value })}
+            />
+            <p className="text-xs text-gray-500">
+              Insira o ID do seu Pixel do Facebook para rastreamento de conversões.
             </p>
           </div>
 

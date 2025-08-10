@@ -23,8 +23,9 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { whatsappNumber } = body;
+    const { whatsappNumber, pixelId } = body;
 
+    // Apenas o whatsappNumber continua obrigatório por enquanto.
     if (!whatsappNumber) {
       return NextResponse.json(
         { error: 'Número de WhatsApp é obrigatório' },
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const settings = { whatsappNumber };
+    const settings = { whatsappNumber, pixelId: pixelId || '' };
     await fs.writeFile(settingsPath, JSON.stringify(settings, null, 2));
 
     return NextResponse.json({ message: 'Configurações atualizadas com sucesso' });
